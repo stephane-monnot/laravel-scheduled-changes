@@ -47,7 +47,6 @@ return [
 
 ```php
 use StephaneMonnot\LaravelScheduledChanges\Models\ScheduleChange;
-use StephaneMonnot\LaravelScheduledChanges\Models\ScheduledUnit;
 
 // Create a article or something else
 $article = Article::create([
@@ -69,7 +68,7 @@ $scheduleChange->units()->create([
     ],
 ]);
 
-Add to your scheduler the following command to execute the scheduled changes:
+// Add to your scheduler the following command to execute the scheduled changes:
 Schedule::command('scheduled-changes:process --dispatch')->everyMinute();
 ```
 
