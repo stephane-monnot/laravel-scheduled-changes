@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace StephaneMonnot\LaravelScheduledChanges;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
+use StephaneMonnot\LaravelScheduledChanges\Commands\ProcessScheduledChangesCommand;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class LaravelScheduledChangesServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +16,10 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name('laravel-scheduled-changes')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_migration_table_name_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasMigration('create_scheduled_changes_table')
+            ->hasCommand(ProcessScheduledChangesCommand::class);
     }
 }

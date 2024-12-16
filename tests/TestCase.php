@@ -1,10 +1,9 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace StephaneMonnot\LaravelScheduledChanges\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
+use StephaneMonnot\LaravelScheduledChanges\LaravelScheduledChangesServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -12,15 +11,16 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
+        $this->loadMigrationsFrom([
+            '--database' => 'testing',
+            '--path' => realpath(__DIR__.'/TestMigrations'),
+        ]);
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            LaravelScheduledChangesServiceProvider::class,
         ];
     }
 
@@ -28,9 +28,7 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_scheduled_changes_table.php.stub';
         $migration->up();
-        */
     }
 }
