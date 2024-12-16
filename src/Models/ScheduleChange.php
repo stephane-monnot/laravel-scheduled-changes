@@ -35,7 +35,7 @@ class ScheduleChange extends Model
         return $this->hasMany(ScheduledUnit::class);
     }
 
-    static public function createChange(string $type, array $payload, Carbon $scheduledAt): self
+    public static function createChange(string $type, array $payload, Carbon $scheduledAt): self
     {
         return self::create([
             'type' => $type,
