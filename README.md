@@ -62,11 +62,8 @@ $scheduleChange = ScheduleChange::create([
 ]);
 
 // Create a new scheduled unit
-$scheduleChange->units()->create([
-    'data' => [
-        'serialized_model' => serialize($article),
-    ],
-]);
+$scheduledUnit = $scheduleChange->units()->create();
+$scheduledUnit->schedulable()->associate($article);
 
 // Add to your scheduler the following command to execute the scheduled changes:
 Schedule::command('scheduled-changes:process --dispatch')->everyMinute();
