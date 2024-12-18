@@ -2,6 +2,7 @@
 
 namespace StephaneMonnot\LaravelScheduledChanges\Jobs;
 
+use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -12,7 +13,7 @@ use StephaneMonnot\LaravelScheduledChanges\Models\ScheduledUnit;
 
 class HandleChangeJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public ChangeHandler $handler;
 

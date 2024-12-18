@@ -16,17 +16,18 @@ return new class extends Migration
 
         Schema::create($tableNames['schedule_changes'], function (Blueprint $table) {
             $table->id();
-            $table->string('type'); // Type de changement (e.g., publish_content)
-            $table->json('payload'); // Données spécifiques au changement
-            $table->string('status')->default('pending'); // Statut : pending, executed, failed
-            $table->timestamp('scheduled_at'); // Date d'exécution planifiée
+            $table->string('type');
+            $table->json('payload');
+            $table->string('status')->default('pending');
+            $table->timestamp('scheduled_at');
             $table->timestamps();
         });
 
         Schema::create($tableNames['scheduled_units'], function (Blueprint $table) {
             $table->id();
             $table->foreignId('schedule_change_id')->constrained('schedule_changes')->onDelete('cascade');
-            $table->json('data'); // Données associées à l'unité
+            $table->json('data')->nullable();
+            $table->nullableMorphs('schedulable');
             $table->timestamps();
         });
     }

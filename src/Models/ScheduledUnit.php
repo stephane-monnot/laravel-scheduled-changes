@@ -3,6 +3,8 @@
 namespace StephaneMonnot\LaravelScheduledChanges\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * @property array $data
@@ -23,8 +25,13 @@ class ScheduledUnit extends Model
         $this->setTable(config('scheduled-changes.table_names.scheduled_units') ?: parent::getTable());
     }
 
-    public function scheduleChange(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function scheduleChange(): BelongsTo
     {
         return $this->belongsTo(ScheduleChange::class);
+    }
+
+    public function schedulable(): MorphTo
+    {
+        return $this->morphTo('schedulable');
     }
 }

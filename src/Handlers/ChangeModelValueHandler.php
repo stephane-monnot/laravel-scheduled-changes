@@ -13,18 +13,14 @@ class ChangeModelValueHandler implements ChangeHandler
     {
         $data = [
             ...$unit->scheduleChange->payload,
-            ...$unit->data,
+            ...($unit->data ?? []),
         ];
 
-        if (! isset($data['serialized_model'], $data['attribute'], $data['value'])) {
-            throw new \InvalidArgumentException('Invalid data provided for ChangeModelValueHandler.');
-        }
-
-        // Unserialize the model instance
-        $model = unserialize($data['serialized_model']);
+        // Get the model from the morph column
+        $model = $unit->schedulable;
 
         if (! $model || ! $model instanceof Model || ! method_exists($model, 'update')) {
-            throw new \RuntimeException('Invalid serialized model provided.');
+            throw new \RuntimeException('Invalid model provided.');
         }
 
         // Update the specified attribute with the new value

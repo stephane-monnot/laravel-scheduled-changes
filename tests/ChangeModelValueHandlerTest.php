@@ -12,9 +12,6 @@ it('can change model value', function () {
         'email' => 'oldemail@example.com',
     ]);
 
-    // Serialize the model
-    $serializedModel = serialize($user);
-
     // Create a ScheduledUnit with the handler's data
     $change = ScheduleChange::create([
         'type' => 'change_model_value',
@@ -25,11 +22,8 @@ it('can change model value', function () {
         'scheduled_at' => now(),
     ]);
 
-    $unit = $change->units()->create([
-        'data' => [
-            'serialized_model' => $serializedModel,
-        ],
-    ]);
+    $unit = $change->units()->create();
+    $unit->schedulable()->associate($user);
 
     // Instantiate the handler
     $handler = new ChangeModelValueHandler;
@@ -47,18 +41,9 @@ it('can convert the handler into a dispatchable job', function () {
         'email' => 'oldemail@example.com',
     ]);
 
-    // Serialize the model
-    $serializedModel = serialize($user);
-
     // Create a ScheduledUnit with the handler's data
     $unit = ScheduledUnit::create([
         'schedule_change_id' => 1,
-        'data' => [
-            'type' => 'change_model_value',
-            'serialized_model' => $serializedModel,
-            'attribute' => 'email',
-            'value' => 'newemail@example.com',
-        ],
     ]);
 
     // Instantiate the handler

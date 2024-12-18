@@ -29,7 +29,7 @@ class ProcessScheduledChangesCommand extends Command
                 // Log the processing of the main change
                 $this->info("Processing batch ID {$change->id}");
 
-                $change->update(['status' => 'processing']);
+//                $change->update(['status' => 'processing']);
 
                 $jobs = [];
                 /** @var ScheduledUnit $unit */

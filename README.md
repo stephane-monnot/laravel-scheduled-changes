@@ -18,14 +18,14 @@ composer require stephane-monnot/laravel-scheduled-changes
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-scheduled-changes-migrations"
+php artisan vendor:publish --tag="scheduled-changes-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-scheduled-changes-config"
+php artisan vendor:publish --tag="scheduled-changes-config"
 ```
 
 This is the contents of the published config file:
