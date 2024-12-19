@@ -4,7 +4,6 @@ namespace StephaneMonnot\LaravelScheduledChanges\Factories;
 
 use InvalidArgumentException;
 use StephaneMonnot\LaravelScheduledChanges\Contracts\ChangeHandler;
-use StephaneMonnot\LaravelScheduledChanges\Handlers\ChangeModelValueHandler;
 
 class ChangeHandlerFactory
 {
