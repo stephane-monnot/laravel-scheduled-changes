@@ -13,9 +13,13 @@ class ChangeHandlerFactory
      */
     public static function make(string $type): ChangeHandler
     {
-        return match ($type) {
-            'change_model_value' => new ChangeModelValueHandler,
-            default => throw new InvalidArgumentException("Handler for type {$type} is not defined."),
-        };
+        // use config to get the handler class
+        $handlerClass = config("scheduled-changes.handlers.{$type}");
+
+        if (! $handlerClass) {
+            throw new InvalidArgumentException("Handler for type {$type} is not defined.");
+        }
+
+        return new $handlerClass;
     }
 }
