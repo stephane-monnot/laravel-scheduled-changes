@@ -52,12 +52,16 @@ use StephaneMonnot\LaravelScheduledChanges\Models\ScheduleChange;
 $article = Article::create([
     'title' => 'New article',
     'content' => 'This is a new article',
+    'published' => false,
 ]);
 
 // Create a new scheduled change
 $scheduleChange = ScheduleChange::create([
-    'name' => 'Publish new article',
-    'description' => 'This article will be published in 2 days',
+    'type' => 'change_model_value',
+    'payload' => [
+        'attribute' => 'published',
+        'value' => true,
+    ],
     'scheduled_at' => now()->addDays(2),
 ]);
 
